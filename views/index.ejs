@@ -5,7 +5,21 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+
+
+
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+    <form action= "/readNameAndRespond" method= "post" >
+
+      Name: <input type="text" name="name"><br>
+
+      <input type="submit" name="Go" id="go" value="Go!"/>
+
+    </form>
+
+
+
   </body>
 </html>
