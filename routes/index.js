@@ -6,8 +6,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Hello World!' });
 });
+*/
 
-/*
 //########################################
 //to process data sent in on request need body-parser module
 var bodyParser = require('body-parser');
@@ -17,7 +17,7 @@ var querystring = require('querystring'); //for use in GET Query string of form 
 router.use(bodyParser.json()); // for parsing application/json
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
 //#########################################
-*/
+
 
 
 // GET with  URI  /read/Lynne   which means name=Lynne
