@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Hello World!' });
 });
 
-
+/*
 //########################################
 //to process data sent in on request need body-parser module
 var bodyParser = require('body-parser');
@@ -20,6 +20,8 @@ router.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
 
 // GET with  URI  /read/Lynne   which means name=Lynne
 router.post('/readNameAndRespond', function(req, res, next) {
+
+*/
     //expecting data variable called name --retrieve value using body-parser
     //var body = JSON.stringify(req.body);  //if wanted entire body as JSON
     //var params = JSON.stringify(req.params);//if wanted parameters
