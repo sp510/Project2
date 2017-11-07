@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-
+/*
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Hello World!' });
 });
@@ -21,7 +21,7 @@ router.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
 
 
 // GET with  URI  /read/Lynne   which means name=Lynne
-router.post('/readNameAndRespond', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
 
     //expecting data variable called name --retrieve value using body-parser
