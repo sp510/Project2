@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
     //res.render('readNameAndRespond', {outputName: req.params.name })
 
     res.send("hello " + value_name);
-})
+});
 
 
 module.exports = router;
