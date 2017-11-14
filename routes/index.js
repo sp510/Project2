@@ -59,10 +59,10 @@ router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 
 router.post('/readOrderAndRespond', function(req, res, next) {
 
-    var firstName = req.body.firstName;  //retrieve the data associated with name
-    var lastName = req.body.lastName;
-    var addr1 = req.body.addr1;
-    var city = req.body.city;
+    var firstName = req.body.name;  //retrieve the data associated with name
+    var lastName = req.body.name;
+    var addr1 = req.body.name;
+    var city = req.body.name;
 
     //var value_name = req.params.name;  //retrieve the data associated with name
 
