@@ -20,7 +20,7 @@ router.use(bodyParser.urlencoded({ extended: true })); // for parsing applicatio
 
 
 
-// GET with  URI  /read/Lynne   which means name=Lynne
+
 router.post('/readNameAndRespond', function(req, res, next) {
 
 
@@ -59,16 +59,16 @@ router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 
 router.post('/readOrderAndRespond', function(req, res, next) {
 
-    var firstName = req.body.name;  //retrieve the data associated with name
-    var lastName = req.body.name;
-    var addr1 = req.body.name;
-    var city = req.body.name;
+    var firstName = req.body.firstName;  //retrieve the data associated with name
+    var lastName = req.body.lastName;
+    var addr1 = req.body.addr1;
+    var city = req.body.city;
 
     //var value_name = req.params.name;  //retrieve the data associated with name
 
-    //res.render('readNameAndRespond', {outputName: req.params.name })
+    res.render('readOrderAndRespond', {outputName: req.params.firstName })
 
-    res.send("hello " + value_name);
+    res.send("hello " + firstName);
 });
 
 
