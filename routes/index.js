@@ -54,9 +54,6 @@ var controllerMongoCollection = require('../controllers/database'); //load contr
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 
 
-
-
-
 router.post('/readOrderAndRespond', function(req, res, next) {
 
     var firstName = req.body.firstName;  //retrieve the data associated with name
@@ -66,7 +63,7 @@ router.post('/readOrderAndRespond', function(req, res, next) {
 
     //var value_name = req.params.name;  //retrieve the data associated with name
 
-    res.render('readOrderAndRespond', {firstName: firstName})
+    res.render('readOrderAndRespond', {out: firstName})
 
 
 });
