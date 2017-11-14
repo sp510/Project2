@@ -57,7 +57,7 @@ router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 
 
 
-router.post('/readOrderAndRespond.ejs.ejs', function(req, res, next) {
+router.post('/readOrderAndRespond', function(req, res, next) {
 
     var firstName = req.body.firstName;  //retrieve the data associated with name
     var lastName = req.body.lastName;
