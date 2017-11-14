@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Hello World!' });
+    res.render('index', { title: 'Hello World!' });
 });
 
 
@@ -50,8 +50,6 @@ router.post('/readNameAndRespond', function(req, res, next) {
 //***** mongodb get all of the Routes in Routes collection w
 //      and Render information iwith an ejs view
 //router.get('/getAllRoutes', controllerMongoCollection.getAllRoutes);
-
-
 
 
 
