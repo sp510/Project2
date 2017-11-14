@@ -1,55 +1,54 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Hello World!' });
-});
+var mongodb = require('mongodb');
+var mongoDBURI = process.env.MONGODB_URI || 'mongodb://steven:steven@ds259175.mlab.com:59175/songscs3520';
 
 
-//########################################
-//to process data sent in on request need body-parser module
-var bodyParser = require('body-parser');
-var path = require ('path'); //to work with separtors on any OS including Windows
-var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
+/** getAllRoutes controller logic that current does model logic too -connects to Mongo database and
+ * queries the Routes collection to retrieve all the routes and build the output usig the
+ * ejs template mongodb.ejs found in views directory
+ * @param request
+ * @param response
+ *
+ */
+module.exports.getAllOrders =  function (request, response) {
 
-router.use(bodyParser.json()); // for parsing application/json
-router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencode
-//#########################################
+    mongodb.MongoClient.connect(mongoDBURI, function(err, db) {
+        if(err) throw err;
 
-
-
-// GET with  URI  /read/Lynne   which means name=Lynne
-router.post('/readNameAndRespond', function(req, res, next) {
-
-
-    //expecting data variable called name --retrieve value using body-parser
-    var body = JSON.stringify(req.body);  //if wanted entire body as JSON
-    var params = JSON.stringify(req.params);//if wanted parameters
-    //expecting data variable called name --retrieve value using body-parser
-
-    var value_name = req.body.name;  //retrieve the data associated with name
-
-    //var value_name = req.params.name;  //retrieve the data associated with name
-
-    //res.render('readNameAndRespond', {outputName: req.params.name })
-
-    res.send("hello " + value_name);
-});
-
-//LOAD the various controllers
-//var controllerMain = require('../controllers/main');   //this will load the main controller file
-//var controllerMongoCollection = require('../controllers/database'); //load controller code dealing with database mongodb and Routes collection
-
-//MAY HAVE OTHER CODE in index.js
+        //get collection of routes
+        var Orders = db.collection('Orders');
 
 
-//CODE to route /getAllRoutes to appropriate  Controller function
-//**************************************************************************
-//***** mongodb get all of the Routes in Routes collection w
-//      and Render information iwith an ejs view
-//router.get('/getAllRoutes', controllerMongoCollection.getAllRoutes);
+        //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
+        //   this request and loop  is to display content in the  console log
+        var c = Orders.find({});
+
+        c.forEach(
+            function(myDoc) {
+                console.log( "name: " + myDoc.name );  //just  loging the output to the console
+            }
+        );
 
 
+        //SECOND -show another way to make request for ALL Orders  and simply collect the  documents as an
+        //   array called docs that you  forward to the  getAllRoutes.ejs view for use there
+        Orders.find().toArray(function (err, docs) {
+            if(err) throw err;
 
+            response.render('getAllOrders', {results: docs});
+
+        });
+
+
+        //Showing in comments here some alternative read (find) requests
+        //this gets Orders where frequency>=10 and sorts by name
+        // Orders.find({ "frequency": { "$gte": 10 } }).sort({ name: 1 }).toArray(function (err, docs) {
+        // this sorts all the Orders by name
+        //  Orders.find().sort({ name: 1 }).toArray(fu namenction (err, docs) {
+
+
+        //close connection when your app is terminating.
+        db.close(function (err) {
+            if(err) throw err;
+        });
+    });//end of connect
+};//end function

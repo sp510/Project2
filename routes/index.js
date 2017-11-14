@@ -38,9 +38,11 @@ router.post('/readNameAndRespond', function(req, res, next) {
     res.send("hello " + value_name);
 });
 
+module.exports = router;
+
 //LOAD the various controllers
 //var controllerMain = require('../controllers/main');   //this will load the main controller file
-//var controllerMongoCollection = require('../controllers/database'); //load controller code dealing with database mongodb and Routes collection
+var controllerMongoCollection = require('../controllers/database'); //load controller code dealing with database mongodb and Routes collection
 
 //MAY HAVE OTHER CODE in index.js
 
@@ -49,7 +51,7 @@ router.post('/readNameAndRespond', function(req, res, next) {
 //**************************************************************************
 //***** mongodb get all of the Routes in Routes collection w
 //      and Render information iwith an ejs view
-//router.get('/getAllRoutes', controllerMongoCollection.getAllRoutes);
+router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 
 
 
