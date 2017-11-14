@@ -66,7 +66,7 @@ router.post('/readOrderAndRespond', function(req, res, next) {
 
     //var value_name = req.params.name;  //retrieve the data associated with name
 
-    res.render('readOrderAndRespond', {firstName: req.params.firstName })
+    res.render('readOrderAndRespond', {firstName: firstName})
 
 
 });
