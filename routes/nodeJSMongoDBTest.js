@@ -31,7 +31,7 @@ var seedData = [
 // Standard URI format:  mongodb://[dbuser:dbpassword@]host:port/dbname
 // GO TO mLab.com account to see what YOUR database URL is
 //CHANGE the url so it is correct for your account
-var uri ='mongodb://steven:steven510@ds251245.mlab.com:51245/cs3520';
+var uri ='mongodb://steven:steven@ds259175.mlab.com:59175/songscs3520';
 
 //using mongodb module
 mongodb.MongoClient.connect(uri, function(err, db) {
