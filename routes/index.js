@@ -72,7 +72,7 @@ router.post('/readOrderAndRespond', function(req, res, next) {
         //{firstName: firstName, lastName: lastName, addr1: addr1, city:city})
 
 
-    / Create seed data -- it is in JSON format
+    // Create seed data -- it is in JSON format
     var seedData = [
         {
             FirstName: firstName,
