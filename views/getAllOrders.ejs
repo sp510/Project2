@@ -10,10 +10,10 @@
     <h2>Database Results getting Orders: </h2>
     <ul>
         <% results.forEach(function(r) { %>
-        <li>Name :<%= r.name %> </li>
+        <li>First Name :<%= r.FirstName %> </li>
         <ul>
-            <li>Billing:( <%=r.billing %>)</li>
-            <li>Shipping: ( <%=r.shipping %> ) </li>
+            <li>Last Name:( <%=r.LastName %>)</li>
+            <li>City: ( <%=r.City %> ) </li>
         </ul>
         <br/><br/>
         <% }); %>
