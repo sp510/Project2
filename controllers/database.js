@@ -15,7 +15,7 @@ module.exports.getAllOrders =  function (request, response) {
         if(err) throw err;
 
         //get collection of routes
-        var Orders = db.collection('Orders');
+        var Customers = db.collection('Customers');
 
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
