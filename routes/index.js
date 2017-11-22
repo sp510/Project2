@@ -2,8 +2,9 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var mongodb = require('mongodb');
+module.exports = router;
 
-//var db = require('./database.js');
+var sD = require('../controllers/storeData');
 
 
 
@@ -44,7 +45,7 @@ router.post('/readNameAndRespond', function(req, res, next) {
     res.send("hello " + value_name);
 });
 
-module.exports = router;
+
 
 //LOAD the various controllers
 //var controllerMain = require('../controllers/main');   //this will load the main controller file
@@ -59,7 +60,9 @@ var controllerMongoCollection = require('../controllers/database'); //load contr
 //      and Render information iwith an ejs view
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
-router.get('/storeData', controllerMongoCollection.storeData);
+//router.get('/storeData', controllerMongoCollection.storeData);
+
+sD.storeData();
 
 /*
 router.post('/readOrderAndRespond', function(req, res, next) {
