@@ -34,7 +34,7 @@ module.exports.getAllOrders =  function (request, response) {
        */
         //SECOND -show another way to make request for ALL Orders  and simply collect the  documents as an
         //   array called docs that you  forward to the  getAllRoutes.ejs view for use there
-        Customers.find().toArray(function (err, ocs) {
+        Customers.find().toArray(function (err, docs) {
             if(err) throw err;
 
             response.render('getAllOrders', {results: docs});
