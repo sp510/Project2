@@ -20,7 +20,7 @@ module.exports.getAllOrders =  function (request, response) {
         if(err) throw err;
 
         //get collection of routes
-        var Customers = db.collection('Orders');
+        var Customers = db.collection('Shipping');
 
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
@@ -69,9 +69,9 @@ module.exports.storeData =  function (request, response) {
         var fName = req.body.firstName;  //retrieve the data associated with name
         var lName = req.body.lastName;
         var addr1 = req.body.addr1;
-        var addr2 = req.body.addr2;
+        //var addr2 = req.body.addr2;
         var city = req.body.city;
-        var state = req.body.state;
+        //var state = req.body.state;
 
         //app.set('firstName', firstName);
 
