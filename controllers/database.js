@@ -13,13 +13,14 @@ var router = express.Router();
  * @param response
  *
  */
+
 module.exports.getAllOrders =  function (request, response) {
 
     mongodb.MongoClient.connect(mongoDBURI, function(err, db) {
         if(err) throw err;
 
         //get collection of routes
-        var Customers = db.collection('Customers');
+        var Customers = db.collection('Orders');
 
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
