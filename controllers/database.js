@@ -1,5 +1,7 @@
 var mongodb = require('mongodb');
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://steven:steven@ds259175.mlab.com:59175/songscs3520';
+var express = require('express');
+var router = express.Router();
 
 
 /** getAllRoutes controller logic that current does model logic too -connects to Mongo database and
