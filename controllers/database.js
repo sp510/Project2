@@ -4,6 +4,8 @@ var express = require('express');
 var router = express.Router();
 
 
+
+
 /** getAllRoutes controller logic that current does model logic too -connects to Mongo database and
  * queries the Routes collection to retrieve all the routes and build the output usig the
  * ejs template mongodb.ejs found in views directory
@@ -81,8 +83,8 @@ module.exports.storeData =  function (request, response) {
         // Create seed data -- it is in JSON format
         var seedData = [
             {
-                FirstName: firstName,
-                LastName: lastName,
+                FirstName: fName,
+                LastName: lName,
                 Address: addr1,
                 City: city
 

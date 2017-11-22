@@ -3,6 +3,9 @@ var app = express();
 var router = express.Router();
 var mongodb = require('mongodb');
 
+var db = require('./database.js');
+
+
 
 /* GET home page. */
 
@@ -54,6 +57,7 @@ var controllerMongoCollection = require('../controllers/database'); //load contr
 //**************************************************************************
 //***** mongodb get all of the Routes in Routes collection w
 //      and Render information iwith an ejs view
+
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 router.get('/storeData', controllerMongoCollection.storeData);
 
