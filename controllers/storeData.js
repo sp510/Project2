@@ -1,10 +1,12 @@
 var express = require('express');
 var app = express();
 var router = express.Router();
+var mongodb = require('mongodb');
+module.exports = router;
 
 
 
-    var storeData = router.post('/storeData', function(req, res, next) {
+    module.exports.storeData = router.post('/storeData', function(req, res, next) {
 
         var fName = req.body.firstName;  //retrieve the data associated with name
         var lName = req.body.lastName;
