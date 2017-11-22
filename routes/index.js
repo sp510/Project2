@@ -59,7 +59,7 @@ var controllerMongoCollection = require('../controllers/database'); //load contr
 //      and Render information iwith an ejs view
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
-router.get('/storeData', controllerMongoCollection.storeData);
+//router.get('/storeData', controllerMongoCollection.storeData);
 
 /*
 router.post('/readOrderAndRespond', function(req, res, next) {
