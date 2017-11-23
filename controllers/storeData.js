@@ -8,6 +8,8 @@ var mongodb = require('mongodb');
 
     router.post('/storeData', function (req, res, next) {
 
+        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+
         //Shipping default values
         var fName = " ";  //retrieve the data associated with name
         var lName = " ";
@@ -16,7 +18,12 @@ var mongodb = require('mongodb');
         var city = " ";
         var state = " ";
         var zip = " ";
-        //var phone = "";
+        var phone = " ";
+        var email = " ";
+
+        var card = " ";
+        var cardNum = " ";
+
 
 
         fName = req.body.fName;
@@ -26,20 +33,15 @@ var mongodb = require('mongodb');
         city = req.body.city;
         state = req.body.state;
         zip = req.body.zip;
-        //phone = req.body.phone;
+        phone = req.body.phone;
+        email = req.body.email;
 
-        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
 
-        //app.set('firstName', firstName);
 
-        //var value_name = req.params.name;  //retrieve the data associated with name
-
-        //res.render('readOrderAndRespond',
-        //{firstName: firstName, lastName: lastName, addr1: addr1, city:city})
 
 
         // Create seed data -- it is in JSON format
-        var seedData = [
+        var seedCust = [
             {
                 _id: customerID,
                 FirstName: fName,
@@ -50,6 +52,33 @@ var mongodb = require('mongodb');
                 State: state,
                 Zip: zip
 
+            }
+        ];
+
+        var seedShip = [
+            {
+                _id: customerID,
+                FirstName: fName,
+                LastName: lName,
+                Address1: addr1,
+                Address2: addr2,
+                City: city,
+                State: state,
+                Zip: zip
+
+            }
+        ];
+
+        var seedBill = [
+            {
+                _id: customerID,
+                FirstName: fName,
+                LastName: lName,
+                Address1: addr1,
+                Address2: addr2,
+                City: city,
+                State: state,
+                Zip: zip
 
             }
         ];
@@ -69,19 +98,30 @@ var mongodb = require('mongodb');
              * First we'll add a  few songs. Nothing is required to create the
              * songs collection;  it is created automatically when we insert.
              */
-            var Shipping = db.collection('Shipping');
+            var custInfo = db.collection('CUSTOMER');
+            var shipping = db.collection('SHIPPING');
+            var billing = db.collection('BILLING');
 
             // Note that the  insert method can take either an array or a dict.
-            Shipping.insert(seedData, function (err, result) {
+            shipping.insert(seedCust, function (err, result) {
                 if (err) throw err;
-
-                /*
-                 * Then we need to  give Boyz II Men credit for their contribution
-                 * to the hit  "One Sweet Day".
-                 */
-
             });
+
+            custInfo.insert(seedShip, function (err, result) {
+                if (err) throw err;
+            });
+
+            billing.insert(seedBill, function (err, result) {
+                if (err) throw err;
+            });
+
+
         });
 
     });
-module.exports = router;
+
+
+
+
+
+    module.exports = router;
