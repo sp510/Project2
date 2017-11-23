@@ -8,8 +8,8 @@ var mongodb = require('mongodb');
 
     router.post('/storeData', function (req, res, next) {
 
-        var fName = req.body.firstName;  //retrieve the data associated with name
-        var lName = req.body.lastName;
+        var fName = req.body.fName;  //retrieve the data associated with name
+        var lName = req.body.lName;
         var addr1 = req.body.addr1;
         //var addr2 = req.body.addr2;
         var city = req.body.city;
