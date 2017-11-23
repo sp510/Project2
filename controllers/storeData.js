@@ -9,13 +9,13 @@ var mongodb = require('mongodb');
     router.post('/storeData', function (req, res, next) {
 
         //Shipping default values
-        var fName = "";  //retrieve the data associated with name
-        var lName = "";
-        var addr1 = "";
-        var addr2 = "";
-        var city = "";
-        var state = "";
-        var zip = "";
+        var fName = " ";  //retrieve the data associated with name
+        var lName = " ";
+        var addr1 = " ";
+        var addr2 = " ";
+        var city = " ";
+        var state = " ";
+        var zip = " ";
         //var phone = "";
 
 
