@@ -8,12 +8,27 @@ var mongodb = require('mongodb');
 
     router.post('/storeData', function (req, res, next) {
 
-        var fName = req.body.fName;  //retrieve the data associated with name
-        var lName = req.body.lName;
-        var addr1 = req.body.addr1;
-        //var addr2 = req.body.addr2;
-        var city = req.body.city;
-        //var state = req.body.state;
+        //Shipping default values
+        var fName = "";  //retrieve the data associated with name
+        var lName = "";
+        var addr1 = "";
+        var addr2 = "";
+        var city = "";
+        var state = "";
+        var zip = "";
+        //var phone = "";
+
+
+        fName = req.body.fName;
+        lName = req.body.lName;
+        addr1 = req.body.addr1;
+        addr2 = req.body.addr2;
+        city = req.body.city;
+        state = req.body.state;
+        zip = req.body.zip;
+        //phone = req.body.phone;
+
+        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
 
         //app.set('firstName', firstName);
 
@@ -26,10 +41,15 @@ var mongodb = require('mongodb');
         // Create seed data -- it is in JSON format
         var seedData = [
             {
+                _id: customerID,
                 FirstName: fName,
                 LastName: lName,
-                Address: addr1,
-                City: city
+                Address1: addr1,
+                Address2: addr2,
+                City: city,
+                State: state,
+                Zip: zip
+
 
             }
         ];
