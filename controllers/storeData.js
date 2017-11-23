@@ -23,6 +23,14 @@ var mongodb = require('mongodb');
 
         var card = " ";
         var cardNum = " ";
+        var cvv = " ";
+        var expireMM = " ";
+        var expireYY = " ";
+        var cardZip = " ";
+        var cardName = " ";
+
+
+        var cardExp = req.body.expireMM + "/" + req.body.expireYY;
 
 
 
@@ -36,6 +44,16 @@ var mongodb = require('mongodb');
         phone = req.body.phone;
         email = req.body.email;
 
+        card = req.body.card;
+        cardNum = req.body.cardNum;
+        cvv = req.body.cvv;
+        cardName = req.body.cardName;
+        cardZip = req.body.cardZip;
+
+
+
+
+
 
 
 
@@ -47,10 +65,11 @@ var mongodb = require('mongodb');
                 FirstName: fName,
                 LastName: lName,
                 Address1: addr1,
-                Address2: addr2,
                 City: city,
                 State: state,
-                Zip: zip
+                Zip: zip,
+                Phone: phone,
+                Email: email
 
             }
         ];
@@ -72,13 +91,13 @@ var mongodb = require('mongodb');
         var seedBill = [
             {
                 _id: customerID,
-                FirstName: fName,
-                LastName: lName,
-                Address1: addr1,
-                Address2: addr2,
-                City: city,
-                State: state,
-                Zip: zip
+                Card: card,
+                CardNum: cardNum,
+                CardExp: cardExp,
+                CVV: cvv,
+                CardName: cardName,
+                CardZip: cardZip
+
 
             }
         ];
@@ -103,11 +122,11 @@ var mongodb = require('mongodb');
             var billing = db.collection('BILLING');
 
             // Note that the  insert method can take either an array or a dict.
-            shipping.insert(seedCust, function (err, result) {
+            custInfo.insert(seedShip, function (err, result) {
                 if (err) throw err;
             });
 
-            custInfo.insert(seedShip, function (err, result) {
+            shipping.insert(seedCust, function (err, result) {
                 if (err) throw err;
             });
 
