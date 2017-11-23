@@ -2,11 +2,11 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 var mongodb = require('mongodb');
-module.exports = router;
 
 
 
-    module.exports.storeData = router.post('/storeData', function(req, res, next) {
+
+    router.post('/storeData', function (req, res, next) {
 
         var fName = req.body.firstName;  //retrieve the data associated with name
         var lName = req.body.lastName;
@@ -38,22 +38,22 @@ module.exports = router;
 // Standard URI format:  mongodb://[dbuser:dbpassword@]host:port/dbname
 // GO TO mLab.com account to see what YOUR database URL is
 //CHANGE the url so it is correct for your account
-        var uri ='mongodb://steven:steven@ds259175.mlab.com:59175/songscs3520';
+        var uri = 'mongodb://steven:steven@ds259175.mlab.com:59175/songscs3520';
 
 //using mongodb module
-        mongodb.MongoClient.connect(uri, function(err, db) {
+        mongodb.MongoClient.connect(uri, function (err, db) {
 
-            if(err) throw err;
+            if (err) throw err;
 
             /*
              * First we'll add a  few songs. Nothing is required to create the
              * songs collection;  it is created automatically when we insert.
              */
-            var Shipping =  db.collection('Shipping');
+            var Shipping = db.collection('Shipping');
 
             // Note that the  insert method can take either an array or a dict.
-            Shipping.insert(seedData, function(err, result) {
-                if(err) throw err;
+            Shipping.insert(seedData, function (err, result) {
+                if (err) throw err;
 
                 /*
                  * Then we need to  give Boyz II Men credit for their contribution
@@ -64,3 +64,4 @@ module.exports = router;
         });
 
     });
+module.exports = router;
