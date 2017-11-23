@@ -61,7 +61,7 @@ var controllerstoreData = require('../controllers/storeData');
 //      and Render information iwith an ejs view
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
-router.get('/storeData', controllerstoreData.storeData);
+//router.get('/storeData', controllerstoreData.storeData);
 
 //sD.storeData();
 
