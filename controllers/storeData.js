@@ -114,7 +114,7 @@ var mongodb = require('mongodb');
                 BILLING_ID: billingID,
                 SHIPPING_ID: shippingID,
                 DATE: date,
-                PRODUCT_VECTOR: products,
+                //PRODUCT_VECTOR: products,
                 ORDER_TOTAL: totalPrice
 
 
