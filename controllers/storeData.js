@@ -9,6 +9,9 @@ var mongodb = require('mongodb');
     router.post('/storeData', function (req, res, next) {
 
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var orderID = Math.floor((Math.random() * 10000) +1 );
 
         //Shipping default values
         var fName = " ";  //retrieve the data associated with name
@@ -29,10 +32,7 @@ var mongodb = require('mongodb');
         var cardZip = " ";
         var cardName = " ";
 
-
         var cardExp = req.body.expireMM + "/" + req.body.expireYY;
-
-
 
         fName = req.body.fName;
         lName = req.body.lName;
@@ -50,53 +50,68 @@ var mongodb = require('mongodb');
         cardName = req.body.cardName;
         cardZip = req.body.cardZip;
 
+        var date = req.body.date;
 
+        var totalPrice =req.body.totalPrice;
 
-
-
-
-
+        var productAry = JSON.stringify(req.body.productsAry);
 
 
         // Create seed data -- it is in JSON format
         var seedCust = [
             {
                 _id: customerID,
-                FirstName: fName,
-                LastName: lName,
-                Address1: addr1,
-                City: city,
-                State: state,
-                Zip: zip,
-                Phone: phone,
-                Email: email
+                FIRSTNAME: fName,
+                LASTNAME: lName,
+                STREET: addr1,
+                CITY: city,
+                STATE: state,
+                ZIP: zip,
+                PHONE: phone,
+                EMAIL: email
 
             }
         ];
 
         var seedShip = [
             {
-                _id: customerID,
-                FirstName: fName,
-                LastName: lName,
+                _id: shippingID,
+                CUSTOMER_ID: customerID,
+                FIRSTNAME: fName,
+                LASTNAME: lName,
                 Address1: addr1,
                 Address2: addr2,
-                City: city,
-                State: state,
-                Zip: zip
+                SHIPPING_CITY: city,
+                SHIPPING_STATE: state,
+                SHIPPING_ZIP: zip
 
             }
         ];
 
         var seedBill = [
             {
-                _id: customerID,
-                Card: card,
-                CardNum: cardNum,
-                CardExp: cardExp,
-                CVV: cvv,
-                CardName: cardName,
-                CardZip: cardZip
+                _id: billingID,
+                CUSTOMER_ID: customerID,
+                CREDITCARDTYPE: card,
+                CREDITCARDNUM: cardNum,
+                CREDITCARDEXP: cardExp,
+                CREDITCARDSECURITYNUM: cvv,
+                CARD_NAME: cardName
+                //CardZip: cardZip
+
+            }
+        ];
+
+        var seedOrder = [
+            {
+                _id: orderID,
+                CUSTOMER_ID: customerID,
+                BILLING_ID: billingID,
+                SHIPPING_ID: shippingID,
+                DATE: date,
+                PRODUCT_VECTOR: productAry,
+                ORDER_TOTAL: totalPrice
+
 
 
             }
@@ -120,17 +135,22 @@ var mongodb = require('mongodb');
             var custInfo = db.collection('CUSTOMER');
             var shipping = db.collection('SHIPPING');
             var billing = db.collection('BILLING');
+            var order = db.collection('ORDERS');
 
             // Note that the  insert method can take either an array or a dict.
-            custInfo.insert(seedShip, function (err, result) {
+            custInfo.insertOne(seedShip, function (err, result) {
                 if (err) throw err;
             });
 
-            shipping.insert(seedCust, function (err, result) {
+            shipping.insertOne(seedCust, function (err, result) {
                 if (err) throw err;
             });
 
-            billing.insert(seedBill, function (err, result) {
+            billing.insertOne(seedBill, function (err, result) {
+                if (err) throw err;
+            });
+            order.insertOne(seedOrder, function (err, result)
+            {
                 if (err) throw err;
             });
 
