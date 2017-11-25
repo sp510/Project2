@@ -56,7 +56,7 @@ var mongodb = require('mongodb');
 
         var productAry = JSON.stringify(req.body.productsAry);
 
-        var products = productAry.join();
+        //var products = productAry.join();
 
 
 
