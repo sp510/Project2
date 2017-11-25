@@ -4,14 +4,14 @@ var router = express.Router();
 var mongodb = require('mongodb');
 
 
-
+//module.exports.storeData =  function (request, response) {
 
     router.post('/storeData', function (req, res, next) {
 
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
-        var orderID = Math.floor((Math.random() * 10000) +1 );
+        var orderID = Math.floor((Math.random() * 10000) + 1);
 
         //Shipping default values
         var fName = " ";  //retrieve the data associated with name
@@ -52,14 +52,11 @@ var mongodb = require('mongodb');
 
         var date = req.body.date;
 
-        var totalPrice =req.body.totalPrice;
+        var totalPrice = req.body.totalPrice;
 
-        var products = req.body.productsAry;
+        var products = req.body.products;
 
         //var products = productAry.join();
-
-
-
 
 
         // Create seed data -- it is in JSON format
@@ -118,7 +115,6 @@ var mongodb = require('mongodb');
                 ORDER_TOTAL: totalPrice
 
 
-
             }
         ];
 
@@ -154,18 +150,18 @@ var mongodb = require('mongodb');
             billing.insert(seedBill, function (err, result) {
                 if (err) throw err;
             });
-            order.insert(seedOrder, function (err, result)
-            {
+            order.insert(seedOrder, function (err, result) {
                 if (err) throw err;
             });
 
 
         });
 
-    });
+        res.render('finalOrder');
 
+   });
 
-
-
+//};
 
     module.exports = router;
+
