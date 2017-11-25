@@ -138,18 +138,18 @@ var mongodb = require('mongodb');
             var order = db.collection('ORDERS');
 
             // Note that the  insert method can take either an array or a dict.
-            custInfo.insertOne(seedShip, function (err, result) {
+            custInfo.insert(seedShip, function (err, result) {
                 if (err) throw err;
             });
 
-            shipping.insertOne(seedCust, function (err, result) {
+            shipping.insert(seedCust, function (err, result) {
                 if (err) throw err;
             });
 
-            billing.insertOne(seedBill, function (err, result) {
+            billing.insert(seedBill, function (err, result) {
                 if (err) throw err;
             });
-            order.insertOne(seedOrder, function (err, result)
+            order.insert(seedOrder, function (err, result)
             {
                 if (err) throw err;
             });
