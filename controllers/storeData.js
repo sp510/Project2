@@ -56,6 +56,9 @@ var mongodb = require('mongodb');
 
         var productAry = JSON.stringify(req.body.productsAry);
 
+        console.log(productAry);
+
+
 
         // Create seed data -- it is in JSON format
         var seedCust = [
