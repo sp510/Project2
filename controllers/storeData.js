@@ -56,7 +56,9 @@ var mongodb = require('mongodb');
 
         var productAry = JSON.stringify(req.body.productsAry);
 
-        console.log(productAry);
+        var products = productAry.join();
+
+
 
 
 
@@ -112,7 +114,7 @@ var mongodb = require('mongodb');
                 BILLING_ID: billingID,
                 SHIPPING_ID: shippingID,
                 DATE: date,
-                PRODUCT_VECTOR: productAry,
+                PRODUCT_VECTOR: products,
                 ORDER_TOTAL: totalPrice
 
 
