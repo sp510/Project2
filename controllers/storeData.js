@@ -167,7 +167,26 @@ var mongodb = require('mongodb');
 
 
             fName: fName,
-            lName: lName
+            lName: lName,
+            addr1: addr1,
+            addr2: addr2,
+            city: city,
+            state: state,
+            zip: zip,
+            phone: phone,
+            email: email,
+
+            card: card,
+            cardNum: cardNum,
+            cvv: cvv,
+            cardName: cardName,
+            cardZip: cardZip,
+
+            date: date,
+
+            totalPrice: totalPrice,
+
+            products: products,
 
 
         });
