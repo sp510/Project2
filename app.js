@@ -18,10 +18,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-app.engine( 'ejs', engine );
-app.set( 'view engine', 'ejs' );
-app.engine('php', phpnode);
-app.set('view engine', 'php');
+//app.engine( 'ejs', engine );
+//app.set( 'view engine', 'ejs' );
+//app.engine('php', phpnode);
+//app.set('view engine', 'php');
 
 
 
