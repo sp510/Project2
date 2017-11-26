@@ -14,7 +14,7 @@ var mongodb = require('mongodb');
         var orderID = Math.floor((Math.random() * 10000) + 1);
 
         //Shipping default values
-        var fName = " ";  //retrieve the data associated with name
+        var fName = 'hello';  //retrieve the data associated with name
         var lName = " ";
         var addr1 = " ";
         var addr2 = " ";
@@ -31,6 +31,8 @@ var mongodb = require('mongodb');
         var expireYY = " ";
         var cardZip = " ";
         var cardName = " ";
+
+
 
         var cardExp = req.body.expireMM + "/" + req.body.expireYY;
 
@@ -55,6 +57,8 @@ var mongodb = require('mongodb');
         var totalPrice = req.body.totalPrice;
 
         var products = req.body.products;
+
+
 
         //var products = productAry.join();
 
@@ -162,8 +166,8 @@ var mongodb = require('mongodb');
         res.render('finalOrder',{
 
 
-            fname: fname,
-            lname: lname,
+            firstName: fname
+            //lname: lname,
 
 
         });
