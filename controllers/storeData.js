@@ -67,7 +67,7 @@ var mongodb = require('mongodb');
         var seedCust = [
             {
                 _id: customerID,
-                FIRSTNAME: firstName,
+                FIRSTNAME: fName,
                 LASTNAME: lName,
                 STREET: addr1,
                 CITY: city,
