@@ -4,9 +4,9 @@ var router = express.Router();
 var mongodb = require('mongodb');
 
 
-//module.exports.storeData =  function (request, response) {
+module.exports.storeData =  function (request, response) {
 
-    router.post('/storeData', function (req, res, next) {
+    //router.post('/storeData', function (req, res, next) {
 
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
@@ -159,9 +159,11 @@ var mongodb = require('mongodb');
 
         res.render('finalOrder');
 
-   });
+   //});
 
 //};
+
+};
 
     module.exports = router;
 
