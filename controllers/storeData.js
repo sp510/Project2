@@ -67,7 +67,7 @@ var mongodb = require('mongodb');
         var seedCust = [
             {
                 _id: customerID,
-                FIRSTNAME: fName,
+                FIRSTNAME: firstName,
                 LASTNAME: lName,
                 STREET: addr1,
                 CITY: city,
@@ -166,8 +166,8 @@ var mongodb = require('mongodb');
         res.render('finalOrder',{
 
 
-            firstName: fname
-            //lname: lname,
+            firstName: fName,
+            lName: lName,
 
 
         });
