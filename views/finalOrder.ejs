@@ -7,7 +7,7 @@ session_start();
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="http://csweb01.csueastbay.edu/~jb4522/Project2/ProductStyles.css">
+    <link rel="stylesheet" href="http://csweb01.csueastbay.edu/~jb4522/Project1/ProductStyles.css">
     <title>finalOrder</title>
 </head>
 
@@ -150,22 +150,16 @@ $this->price = $price;
 //========================================
 // Class basket = represents shopping basket with the variable $session_basket representing the Array of item instances in basket
 
-/**
-* shopping basket class
-*/
+
 class basket {
 
-/**
-* constructor
-*/
+
 function basket() {
 
 $this->sessionStart();
 }
 
-/**
-* start session OR if one already created retrieve shopping_basket
-*/
+
 function sessionStart() {
 global $session_basket;      //global variable ---array of items in basket
 
@@ -198,18 +192,14 @@ echo "session basket NEW";
 
 
 
-/**
-* destory session -- call when someone wants to completely CLEAR the cart --get rid of session
-*/
+
 function sessionEnd() {
 session_unset();
 session_destroy();
 }
 
 
-/**
-*determine the number of elements in basket
-*/
+
 function basketSize() {
 global $session_basket;
 
@@ -224,10 +214,7 @@ return 0;
 return $i;
 }
 
-/**
-* register item in session
-* if same code exist in session, modify it.
-*/
+
 function registerItem($code, $name, $quantity, $price) {
 global $session_basket;
 

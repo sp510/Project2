@@ -17,6 +17,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+app.engine( 'ejs', engine );
+app.set( 'view engine', 'ejs' );
+app.engine('php', phpnode);
+app.set('view engine', 'php');
+
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
