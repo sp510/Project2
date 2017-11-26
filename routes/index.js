@@ -61,9 +61,11 @@ var controllerstoreData = require('../controllers/storeData');
 //      and Render information iwith an ejs view
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
-app.post('/storeData', controllerstoreData.storeData);
 
-//sD.storeData();
+//neither app.post nor router.post worked for me to call "storeData" so I took a different route
+//app.post('/storeData', controllerstoreData.storeData);
+
+
 
 /*
 router.post('/readOrderAndRespond', function(req, res, next) {
