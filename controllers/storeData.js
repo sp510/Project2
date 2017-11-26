@@ -157,7 +157,16 @@ var mongodb = require('mongodb');
 
         });
 
-        res.render('finalOrder');
+
+
+        res.render('finalOrder',{
+
+
+            fname: fname,
+            lname: lname,
+
+
+        });
 
    });
 

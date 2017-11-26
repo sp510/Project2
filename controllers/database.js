@@ -25,22 +25,26 @@ module.exports.getAllOrders =  function (request, response) {
 
         //FIRST showing you one way of making request for ALL routes and cycle through with a forEach loop on returned Cursor
         //   this request and loop  is to display content in the  console log
-        var c = Customers.find({});
+       // var c = Customers.find({});
 
-
+        /*
         c.forEach(
             function(myDoc) {
                 console.log( "name: " + myDoc.name );  //just  loging the output to the console
             }
         );
-
+        */
 
         //SECOND -show another way to make request for ALL Orders  and simply collect the  documents as an
         //   array called docs that you  forward to the  getAllRoutes.ejs view for use there
         Customers.find().toArray(function (err, docs) {
             if(err) throw err;
 
-            response.render('getAllOrders', {results: docs});
+            response.render('getAllOrders', {
+
+                results: docs
+
+            });
 
         });
 
