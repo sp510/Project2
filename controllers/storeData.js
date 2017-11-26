@@ -157,7 +157,7 @@ module.exports.storeData =  function (request, response) {
 
         });
 
-        res.render('finalOrder');
+        //res.render('finalOrder');
 
    //});
 
