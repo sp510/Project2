@@ -166,8 +166,8 @@ var mongodb = require('mongodb');
         res.render('finalOrder',{
 
 
-            firstName: fName,
-            lName: lName,
+            fName: fName,
+            lName: lName
 
 
         });
