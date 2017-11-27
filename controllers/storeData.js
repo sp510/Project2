@@ -54,15 +54,15 @@ var mongodb = require('mongodb');
 
         var date = req.body.date;
 
-        var totalPrice = req.body.totalPrice;
+        var origPrice = req.body.totalPrice;
 
         var products = req.body.products;
 
         var ship = req.body.ship;
 
-        var origPrice = +totalPrice - (+totalPrice * 0.09);
+        var tax = (+origPrice * 0.09);
 
-        var pricePlusShip = +totalPrice + +ship;
+        var totalPrice = +totalPrice + +ship + +tax;
 
 
 
@@ -191,8 +191,8 @@ var mongodb = require('mongodb');
             date: date,
 
             origPrice: origPrice,
+            tax: tax,
             totalPrice: totalPrice,
-            pricePlusShip: pricePlusShip,
 
             ship: ship,
 
