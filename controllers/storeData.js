@@ -58,6 +58,12 @@ var mongodb = require('mongodb');
 
         var products = req.body.products;
 
+        var ship = req.body.ship;
+
+        var origPrice = totalPrice - (totalPrice * 0.09);
+
+        var pricePlusShip = totalPrice + ship;
+
 
 
         //var products = productAry.join();
@@ -184,9 +190,13 @@ var mongodb = require('mongodb');
 
             date: date,
 
+            origPrice: origPrice,
             totalPrice: totalPrice,
+            pricePlusShip: pricePlusShip,
 
-            products: products,
+            ship: ship,
+
+            products: products
 
 
         });
