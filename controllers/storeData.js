@@ -60,9 +60,9 @@ var mongodb = require('mongodb');
 
         var ship = req.body.ship;
 
-        var origPrice = totalPrice - (totalPrice * 0.09);
+        var origPrice = +totalPrice - (+totalPrice * 0.09);
 
-        var pricePlusShip = totalPrice + ship;
+        var pricePlusShip = +totalPrice + +ship;
 
 
 

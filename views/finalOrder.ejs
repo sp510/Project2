@@ -11,7 +11,6 @@
 
 <body>
 
-<h1> <%= cvv %> </h1>
 
 
 <div class="topnav" id="myTopnav">
@@ -62,7 +61,7 @@
             <%= lName %> <br>
             <%= addr1 %><br>
             <%= addr2 %> <br>
-            <%= city %> ?>,
+            <%= city %>,
             <%= state %>
             <%= zip %> <br>
 
@@ -192,8 +191,8 @@
 
         <td width = "175" valign = "top"><p><span style = "float:right;">$<%= origPrice %> </span>Subtotal </p>
             <p>&nbsp;</p>
-            <p style = "color: #3084DC"><span style = "float:right;">$<%= totalPrice %></span>Estimated Tax</p>
-            <p ><span style = "float:right;"> $<%= ship %></span>Shipping</p>
+            <p style = "color: #3084DC"><span style = "float:right;">$ <%= totalPrice %> </span>Estimated Tax</p>
+            <p ><span style = "float:right;">  $<%= ship %> </span>Shipping</p>
             <p><span style = "float:right;"> <%= pricePlusShip %></span>Total</p>
         </td>
 
@@ -245,7 +244,7 @@
 
 
             <form action = "thankyou.php">
-                <input type="submit" value = "Confirm">
+                <input type="submit" value = "continue">
             </form>
 
 
