@@ -287,7 +287,7 @@ var mongodb = require('mongodb');
 
             test: test,
 
-            names: nameAry
+            itemNames: nameAry,
 
         });
 
