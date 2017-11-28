@@ -15,24 +15,24 @@ var mongodb = require('mongodb');
         var orderID = Math.floor((Math.random() * 10000) + 1);
 
         //Shipping default values
-        var fName = "John";  //retrieve the data associated with name
-        var lName = "Doe ";
-        var addr1 = "3243 Highland rd ";
+        var fName = " ";  //retrieve the data associated with name
+        var lName = " ";
+        var addr1 = " ";
         var addr2 = " ";
-        var city = "New York";
-        var state = "NY";
-        var zip = "10005";
-        var phone = "2813308004";
-        var email = "johndoe@gmail.com";
+        var city = " ";
+        var state = " ";
+        var zip = " ";
+        var phone = " ";
+        var email = " ";
 
         //Billing default values
-        var card = "AMEX";
-        var cardNum = "4444333388886666";
-        var cvv = "902";
-        var expireMM = "03";
-        var expireYY = "18";
-        var cardZip = "10001";
-        var cardName = "John Doe";
+        var card = " ";
+        var cardNum = " ";
+        var cvv = " ";
+        var expireMM = " ";
+        var expireYY = " ";
+        var cardZip = " ";
+        var cardName = " ";
 
 
         //Credit Card expiration date in the format MM/YY
