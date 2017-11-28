@@ -126,12 +126,12 @@ var mongodb = require('mongodb');
 
         }
 
-        incr = 0;
+
         start_pos = 0;
         end_pos = 0;
         cur_pos = 0;
 
-        while ( incr < products.length )
+        while ( true )
         {
             start_pos = products.indexOf('Price', end_pos) + 5;
 
@@ -142,7 +142,6 @@ var mongodb = require('mongodb');
             cur_pos = start_pos;
 
             end_pos = products.indexOf('}', start_pos);
-            incr += end_pos;
             priceAry.push(products.substring(start_pos, end_pos));
         }
 
