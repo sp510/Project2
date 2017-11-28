@@ -106,6 +106,7 @@ var mongodb = require('mongodb');
         incr = 0;
         start_pos = 0;
         end_pos = 0;
+        cur_pos = 0;
 
         while ( incr < products.length )
         {
@@ -128,6 +129,7 @@ var mongodb = require('mongodb');
         incr = 0;
         start_pos = 0;
         end_pos = 0;
+        cur_pos = 0;
 
         while ( incr < products.length )
         {
