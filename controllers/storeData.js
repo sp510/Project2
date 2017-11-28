@@ -81,12 +81,12 @@ var mongodb = require('mongodb');
         var prodIDAry = [];
         var quantAry = [];
         var priceAry = [];
-        var start_pos = 0;
+        var start_pos; //Starting Postiion
         var end_pos = 0;
         var incr = 0;
         var cur_pos = 0;
 
-        while ( incr < products.length )
+        while ( true)
         {
 
             start_pos = products.indexOf('ProductID_', end_pos) + 10;
@@ -96,19 +96,15 @@ var mongodb = require('mongodb');
                 break;
             }
             cur_pos = start_pos;
-
             end_pos = products.indexOf(',', start_pos);
-            incr += end_pos;
             prodIDAry.push(products.substring(start_pos, end_pos));
 
         }
 
-        incr = 0;
-        start_pos = 0;
         end_pos = 0;
         cur_pos = 0;
 
-        while ( incr < products.length )
+        while ( true )
         {
 
             start_pos = products.indexOf('Quantity', end_pos) + 8;
@@ -126,8 +122,6 @@ var mongodb = require('mongodb');
 
         }
 
-
-        start_pos = 0;
         end_pos = 0;
         cur_pos = 0;
 
