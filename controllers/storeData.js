@@ -113,7 +113,7 @@ var mongodb = require('mongodb');
 
 
 
-        var test = prodIDAry[0];
+        var test = prodIDAry[1];
 
 
 
