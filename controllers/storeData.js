@@ -72,11 +72,19 @@ var mongodb = require('mongodb');
         var start_pos = 0;
         var end_pos = 0;
         var incr = 0;
+        var cur_pos = 0;
 
         while ( incr < products.length )
         {
 
             start_pos = products.indexOf('ProductID_', end_pos) + 10;
+
+            if(cur_pos > start_pos)//checker to break, because indexof will loop infinitely looking for string occurrences
+            {
+                break;
+            }
+            cur_pos = start_pos;
+
             end_pos = products.indexOf(',', start_pos);
             incr += end_pos;
             prodIDAry.push(products.substring(start_pos, end_pos));
@@ -91,6 +99,13 @@ var mongodb = require('mongodb');
         {
 
             start_pos = products.indexOf('Quantity', end_pos) + 8;
+
+            if(cur_pos > start_pos)
+            {
+                break;
+            }
+            cur_pos = start_pos;
+
             end_pos = products.indexOf(',', start_pos);
             incr += end_pos;
             quantAry.push(products.substring(start_pos, end_pos));
@@ -105,6 +120,13 @@ var mongodb = require('mongodb');
         while ( incr < products.length )
         {
             start_pos = products.indexOf('Price', end_pos) + 5;
+
+            if(cur_pos > start_pos)
+            {
+                break;
+            }
+            cur_pos = start_pos;
+
             end_pos = products.indexOf('}', start_pos);
             incr += end_pos;
             priceAry.push(products.substring(start_pos, end_pos));
