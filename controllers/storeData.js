@@ -8,34 +8,37 @@ var mongodb = require('mongodb');
 
     router.post('/storeData', function (req, res, next) {
 
+        //Randomized values
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
         var orderID = Math.floor((Math.random() * 10000) + 1);
 
         //Shipping default values
-        var fName = 'hello';  //retrieve the data associated with name
-        var lName = " ";
-        var addr1 = " ";
+        var fName = "John";  //retrieve the data associated with name
+        var lName = "Doe ";
+        var addr1 = "3243 Highland rd ";
         var addr2 = " ";
-        var city = " ";
-        var state = " ";
-        var zip = " ";
-        var phone = " ";
-        var email = " ";
+        var city = "New York";
+        var state = "NY";
+        var zip = "10005";
+        var phone = "2813308004";
+        var email = "johndoe@gmail.com";
 
-        var card = " ";
-        var cardNum = " ";
-        var cvv = " ";
-        var expireMM = " ";
-        var expireYY = " ";
-        var cardZip = " ";
-        var cardName = " ";
+        //Billing default values
+        var card = "AMEX";
+        var cardNum = "4444333388886666";
+        var cvv = "902";
+        var expireMM = "03";
+        var expireYY = "18";
+        var cardZip = "10001";
+        var cardName = "John Doe";
 
 
-
+        //Credit Card expiration date in the format MM/YY
         var cardExp = req.body.expireMM + "/" + req.body.expireYY;
 
+        //Post Data from finalOrder.php
         fName = req.body.fName;
         lName = req.body.lName;
         addr1 = req.body.addr1;
@@ -54,7 +57,14 @@ var mongodb = require('mongodb');
 
         var date = req.body.date;
         var origPrice = req.body.totalPrice;
+
+
+
+        //NOTE! 'products' is 1 long string of all product information
+        //will be tokenized and later
         var products = req.body.products;
+
+
         var ship = req.body.ship;
         var tax = (+origPrice * 0.08);
         var totalPrice = +origPrice + +ship + +tax;
@@ -62,41 +72,42 @@ var mongodb = require('mongodb');
         var items = req.body.itemNames;
 
 
-
-        //Places item names into arrays
-
+        //Places item names into arrays to later be used in output
         var nameAry = items.split(', ');
 
-        test = nameAry[0];
 
 
 
 
 
 
-        //********************************************************************************************************
+
+        /********************************************************************************************************
         //This Code is used to extract the incoming values of 'Product_Vector'
         // and conveniently storing them into 3 separate arrays that could later be iterated over to get the values.
+        *******************************************************************************************************/
 
         var prodIDAry = [];
         var quantAry = [];
         var priceAry = [];
-        var start_pos; //Starting Postiion
-        var end_pos = 0;
-        var incr = 0;
-        var cur_pos = 0;
+        var start_pos; //Starting Position
+        var end_pos = 0; //Ending Position the substring in between will be extracted
+        var cur_pos = 0; //cur_pos, used to make sure starting position does not reset
 
         while ( true)
         {
-
+            //finds and sets the initial index to extract substring of "products"
             start_pos = products.indexOf('ProductID_', end_pos) + 10;
 
-            if(cur_pos > start_pos)//checker to break, because indexof will loop infinitely looking for string occurrences
+            //checker to break, because indexof will loop infinitely looking for substring occurrences
+            if(cur_pos > start_pos)
             {
                 break;
             }
             cur_pos = start_pos;
             end_pos = products.indexOf(',', start_pos);
+
+            //All products IDs are extracted to be used in the output
             prodIDAry.push(products.substring(start_pos, end_pos));
 
         }
@@ -116,7 +127,6 @@ var mongodb = require('mongodb');
             cur_pos = start_pos;
 
             end_pos = products.indexOf(',', start_pos);
-            incr += end_pos;
             quantAry.push(products.substring(start_pos, end_pos));
 
 
@@ -138,9 +148,8 @@ var mongodb = require('mongodb');
             end_pos = products.indexOf('}', start_pos);
             priceAry.push(products.substring(start_pos, end_pos));
         }
-
-
-
+        /******************************************************************************************************
+        *******************************************************************************************************/
 
 
 
@@ -148,6 +157,7 @@ var mongodb = require('mongodb');
 
 
         // Create seed data -- it is in JSON format
+            //this data is uploaded onto mongoDB, into 3 separate collections
         var seedCust = [
             {
                 _id: customerID,
@@ -199,9 +209,11 @@ var mongodb = require('mongodb');
                 BILLING_ID: billingID,
                 SHIPPING_ID: shippingID,
                 DATE: date,
-                PRODUCT_VECTOR: products,
-                ORDER_TOTAL: totalPrice
 
+                //Not actually a vector, but a single long string, in the required format
+                PRODUCT_VECTOR: products,
+
+                ORDER_TOTAL: totalPrice
 
             }
         ];
@@ -249,7 +261,6 @@ var mongodb = require('mongodb');
 
         res.render('finalOrder',{
 
-
             fName: fName,
             lName: lName,
             addr1: addr1,
@@ -287,8 +298,6 @@ var mongodb = require('mongodb');
         });
 
    });
-
-//};
 
 
 
