@@ -290,8 +290,6 @@ router.post('/storeData', function (req, res, next) {
         quant: quantAry,
         price: priceAry,
 
-        test: test,
-
         itemNames: nameAry
 
     });
