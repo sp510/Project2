@@ -59,6 +59,14 @@ var mongodb = require('mongodb');
         var tax = (+origPrice * 0.08);
         var totalPrice = +origPrice + +ship + +tax;
 
+        var items = req.body.itemNames;
+
+
+
+        //Places item names into arrays
+        var nameAry = [];
+        nameAry = str.split(',', items);
+
 
 
 
@@ -276,6 +284,8 @@ var mongodb = require('mongodb');
             price: priceAry,
 
             test: test,
+
+            names: nameAry
 
         });
 
