@@ -113,7 +113,7 @@ var mongodb = require('mongodb');
 
 
 
-
+        var test = prodIDAry.length;
 
 
 
@@ -251,7 +251,9 @@ var mongodb = require('mongodb');
 
             prodID: prodIDAry,
             quant: quantAry,
-            price: priceAry
+            price: priceAry,
+
+            test: test,
 
         });
 
