@@ -64,8 +64,10 @@ var mongodb = require('mongodb');
 
 
         //Places item names into arrays
-        var nameAry = [];
-        nameAry = items.split(',');
+
+        var nameAry = items.split(',');
+
+        console.log(nameAry[1]);
 
 
 
