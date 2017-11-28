@@ -53,20 +53,71 @@ var mongodb = require('mongodb');
         cardZip = req.body.cardZip;
 
         var date = req.body.date;
-
         var origPrice = req.body.totalPrice;
-
         var products = req.body.products;
-
         var ship = req.body.ship;
-
         var tax = (+origPrice * 0.08);
-
         var totalPrice = +origPrice + +ship + +tax;
 
 
 
-        //var products = productAry.join();
+
+        //********************************************************************************************************
+        //This Code is used to extract the incoming values of 'Product_Vector'
+        // and conveniently storing them into 3 separate arrays that could later be iterated over to get the values.
+
+        var prodIDAry = [];
+        var quantAry = [];
+        var priceAry = [];
+        var start_pos = 0;
+        var end_pos = 0;
+        var incr = 0;
+
+        while ( incr < products.length )
+        {
+
+            start_pos = products.indexOf('ProductID_', end_pos) + 10;
+            end_pos = products.indexOf(',', start_pos);
+            incr += end_pos;
+            prodIDAry.push(products.substring(start_pos, end_pos));
+
+        }
+
+        incr = 0;
+        start_pos = 0;
+        end_pos = 0;
+
+        while ( incr < products.length )
+        {
+
+            start_pos = products.indexOf('Quantity', end_pos) + 8;
+            end_pos = products.indexOf(',', start_pos);
+            incr += end_pos;
+            quantAry.push(products.substring(start_pos, end_pos));
+
+
+        }
+
+        incr = 0;
+        start_pos = 0;
+        end_pos = 0;
+
+        while ( incr < products.length )
+        {
+            start_pos = products.indexOf('Price', end_pos) + 5;
+            end_pos = products.indexOf('}', start_pos);
+            incr += end_pos;
+            priceAry.push(products.substring(start_pos, end_pos));
+        }
+
+
+
+
+
+
+
+
+
 
 
         // Create seed data -- it is in JSON format
@@ -196,8 +247,11 @@ var mongodb = require('mongodb');
 
             ship: ship,
 
-            products: products
+            products: products,
 
+            prodID: prodIDAry,
+            quant: quantAry,
+            price: priceAry
 
         });
 
