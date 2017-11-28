@@ -1,4 +1,3 @@
-
 var express = require('express');
 var app = express();
 var router = express.Router();
@@ -9,13 +8,14 @@ var mongodb = require('mongodb');
 
 router.post('/storeData', function (req, res, next) {
 
+    //Randomized values
     var customerID = Math.floor((Math.random() * 1000000000000) + 1);
     var billingID = Math.floor((Math.random() * 1000000000000) + 1);
     var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
     var orderID = Math.floor((Math.random() * 10000) + 1);
 
     //Shipping default values
-    var fName = 'hello';  //retrieve the data associated with name
+    var fName = " ";  //retrieve the data associated with name
     var lName = " ";
     var addr1 = " ";
     var addr2 = " ";
@@ -25,6 +25,7 @@ router.post('/storeData', function (req, res, next) {
     var phone = " ";
     var email = " ";
 
+    //Billing default values
     var card = " ";
     var cardNum = " ";
     var cvv = " ";
@@ -34,9 +35,10 @@ router.post('/storeData', function (req, res, next) {
     var cardName = " ";
 
 
-
+    //Credit Card expiration date in the format MM/YY
     var cardExp = req.body.expireMM + "/" + req.body.expireYY;
 
+    //Post Data from finalOrder.php
     fName = req.body.fName;
     lName = req.body.lName;
     addr1 = req.body.addr1;
@@ -55,7 +57,14 @@ router.post('/storeData', function (req, res, next) {
 
     var date = req.body.date;
     var origPrice = req.body.totalPrice;
+
+
+
+    //NOTE! 'products' is 1 long string of all product information
+    //will be tokenized and later
     var products = req.body.products;
+
+
     var ship = req.body.ship;
     var tax = (+origPrice * 0.08);
     var totalPrice = +origPrice + +ship + +tax;
@@ -63,12 +72,10 @@ router.post('/storeData', function (req, res, next) {
     var items = req.body.itemNames;
 
 
-
-    //Places item names into arrays
-
+    //Places item names into arrays to later be used in output
     var nameAry = items.split(', ');
 
-    test = nameAry[0];
+
 
 
 
@@ -78,26 +85,30 @@ router.post('/storeData', function (req, res, next) {
     //********************************************************************************************************
     //This Code is used to extract the incoming values of 'Product_Vector'
     // and conveniently storing them into 3 separate arrays that could later be iterated over to get the values.
+    ////Related data are tied to same indices
+    //*******************************************************************************************************/
 
     var prodIDAry = [];
     var quantAry = [];
     var priceAry = [];
-    var start_pos; //Starting Postiion
-    var end_pos = 0;
-    var incr = 0;
-    var cur_pos = 0;
+    var start_pos; //Starting Position
+    var end_pos = 0; //Ending Position the substring in between will be extracted
+    var cur_pos = 0; //cur_pos, used to make sure starting position does not reset
 
     while ( true)
     {
-
+        //finds and sets the initial index to extract substring of "products"
         start_pos = products.indexOf('ProductID_', end_pos) + 10;
 
-        if(cur_pos > start_pos)//checker to break, because indexof will loop infinitely looking for string occurrences
+        //checker to break, because indexof will loop infinitely looking for substring occurrences
+        if(cur_pos > start_pos)
         {
             break;
         }
         cur_pos = start_pos;
         end_pos = products.indexOf(',', start_pos);
+
+        //All products IDs are extracted to be used in the output
         prodIDAry.push(products.substring(start_pos, end_pos));
 
     }
@@ -117,7 +128,6 @@ router.post('/storeData', function (req, res, next) {
         cur_pos = start_pos;
 
         end_pos = products.indexOf(',', start_pos);
-        incr += end_pos;
         quantAry.push(products.substring(start_pos, end_pos));
 
 
@@ -139,16 +149,14 @@ router.post('/storeData', function (req, res, next) {
         end_pos = products.indexOf('}', start_pos);
         priceAry.push(products.substring(start_pos, end_pos));
     }
-
-
-
-
-
-
+    //******************************************************************************************************
+    //*** Extracting Algorithm Ends
+    //*******************************************************************************************************/
 
 
 
     // Create seed data -- it is in JSON format
+    //this data is uploaded onto mongoDB, into 3 separate collections
     var seedCust = [
         {
             _id: customerID,
@@ -200,9 +208,11 @@ router.post('/storeData', function (req, res, next) {
             BILLING_ID: billingID,
             SHIPPING_ID: shippingID,
             DATE: date,
-            PRODUCT_VECTOR: products,
-            ORDER_TOTAL: totalPrice
 
+            //Not actually a vector, but a single long string, in the required format
+            PRODUCT_VECTOR: products,
+
+            ORDER_TOTAL: totalPrice
 
         }
     ];
@@ -250,7 +260,6 @@ router.post('/storeData', function (req, res, next) {
 
     res.render('finalOrder',{
 
-
         fName: fName,
         lName: lName,
         addr1: addr1,
@@ -291,7 +300,4 @@ router.post('/storeData', function (req, res, next) {
 
 
 
-
-
 module.exports = router;
-
