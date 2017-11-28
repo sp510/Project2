@@ -67,6 +67,8 @@ var mongodb = require('mongodb');
 
         var nameAry = items.split(', ');
 
+        test = nameAry[0];
+
 
 
 
