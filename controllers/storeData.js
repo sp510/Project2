@@ -81,6 +81,7 @@ router.post('/storeData', function (req, res, next) {
     var emptyCart = req.body.emptyCart;
 
     var status;
+
     if(emptyCart === 'true' )
     {
         status = 'Order Not Successful';
@@ -94,8 +95,7 @@ router.post('/storeData', function (req, res, next) {
 
 
 
-    if (emptyCart === 'false')
-    {
+
 
     /********************************************************************************************************
     //This Code is used to extract the incoming values of 'Product_Vector'
@@ -109,6 +109,9 @@ router.post('/storeData', function (req, res, next) {
     var start_pos; //Starting Position
     var end_pos = 0; //Ending Position the substring in between will be extracted
     var cur_pos = 0; //cur_pos, used to make sure starting position does not reset
+
+    if (emptyCart === 'false')
+    {
 
     while ( true )
     {
