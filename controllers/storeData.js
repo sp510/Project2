@@ -80,14 +80,15 @@ router.post('/storeData', function (req, res, next) {
 
     var emptyCart = req.body.emptyCart;
 
-    if(emptyCart == 'true')
+    var status;
+    if(emptyCart === 'true' )
     {
-        var status = 'Order Not Successful';
+        status = 'Order Not Successful';
     }
 
     else
     {
-        var status = 'Order Successful\nTHANK YOU FOR YOUR SUBMITTED ORDER';
+        status = 'Order Successful\nTHANK YOU FOR YOUR SUBMITTED ORDER';
     }
 
 
@@ -167,7 +168,7 @@ router.post('/storeData', function (req, res, next) {
     //*******************************************************************************************************/
 
 
-    if (emptyCar == 'false')
+    if (emptyCart === 'false')
     {
         // Create seed data -- it is in JSON format
         //this data is uploaded onto mongoDB, into 3 separate collections
