@@ -60,6 +60,8 @@ router.post('/storeData', function (req, res, next) {
 
 
 
+
+
     //NOTE! 'products' is 1 long string of all product information
     //will be tokenized and later
     var products = req.body.products;
@@ -76,6 +78,17 @@ router.post('/storeData', function (req, res, next) {
     var nameAry = items.split(', ');
 
 
+    var emptyCart = req.body.emptyCart;
+
+    if(emptyCart == 'true')
+    {
+        var status = 'Order Not Successful';
+    }
+
+    else
+    {
+        var status = 'Order Successful\nTHANK YOU FOR YOUR SUBMITTED ORDER';
+    }
 
 
 
@@ -95,7 +108,7 @@ router.post('/storeData', function (req, res, next) {
     var end_pos = 0; //Ending Position the substring in between will be extracted
     var cur_pos = 0; //cur_pos, used to make sure starting position does not reset
 
-    while ( true)
+    while ( true )
     {
         //finds and sets the initial index to extract substring of "products"
         start_pos = products.indexOf('ProductID_', end_pos) + 10;
@@ -154,109 +167,110 @@ router.post('/storeData', function (req, res, next) {
     //*******************************************************************************************************/
 
 
+    if (emptyCar == 'false')
+    {
+        // Create seed data -- it is in JSON format
+        //this data is uploaded onto mongoDB, into 3 separate collections
+        var seedCust = [
+            {
+                _id: customerID,
+                FIRSTNAME: fName,
+                LASTNAME: lName,
+                STREET: addr1,
+                CITY: city,
+                STATE: state,
+                ZIP: zip,
+                PHONE: phone,
+                EMAIL: email
 
-    // Create seed data -- it is in JSON format
-    //this data is uploaded onto mongoDB, into 3 separate collections
-    var seedCust = [
-        {
-            _id: customerID,
-            FIRSTNAME: fName,
-            LASTNAME: lName,
-            STREET: addr1,
-            CITY: city,
-            STATE: state,
-            ZIP: zip,
-            PHONE: phone,
-            EMAIL: email
+            }
+        ];
 
-        }
-    ];
+        var seedShip = [
+            {
+                _id: shippingID,
+                CUSTOMER_ID: customerID,
+                FIRSTNAME: fName,
+                LASTNAME: lName,
+                Address1: addr1,
+                Address2: addr2,
+                SHIPPING_CITY: city,
+                SHIPPING_STATE: state,
+                SHIPPING_ZIP: zip
 
-    var seedShip = [
-        {
-            _id: shippingID,
-            CUSTOMER_ID: customerID,
-            FIRSTNAME: fName,
-            LASTNAME: lName,
-            Address1: addr1,
-            Address2: addr2,
-            SHIPPING_CITY: city,
-            SHIPPING_STATE: state,
-            SHIPPING_ZIP: zip
+            }
+        ];
 
-        }
-    ];
+        var seedBill = [
+            {
+                _id: billingID,
+                CUSTOMER_ID: customerID,
+                CREDITCARDTYPE: card,
+                CREDITCARDNUM: cardNum,
+                CREDITCARDEXP: cardExp,
+                CREDITCARDSECURITYNUM: cvv,
+                CARD_NAME: cardName
+                //CardZip: cardZip
 
-    var seedBill = [
-        {
-            _id: billingID,
-            CUSTOMER_ID: customerID,
-            CREDITCARDTYPE: card,
-            CREDITCARDNUM: cardNum,
-            CREDITCARDEXP: cardExp,
-            CREDITCARDSECURITYNUM: cvv,
-            CARD_NAME: cardName
-            //CardZip: cardZip
+            }
+        ];
 
-        }
-    ];
+        var seedOrder = [
+            {
+                _id: orderID,
+                CUSTOMER_ID: customerID,
+                BILLING_ID: billingID,
+                SHIPPING_ID: shippingID,
+                DATE: date,
 
-    var seedOrder = [
-        {
-            _id: orderID,
-            CUSTOMER_ID: customerID,
-            BILLING_ID: billingID,
-            SHIPPING_ID: shippingID,
-            DATE: date,
+                //Not actually a vector, but a single long string, in the required format
+                PRODUCT_VECTOR: products,
 
-            //Not actually a vector, but a single long string, in the required format
-            PRODUCT_VECTOR: products,
+                ORDER_TOTAL: totalPrice
 
-            ORDER_TOTAL: totalPrice
-
-        }
-    ];
+            }
+        ];
 
 
 // Standard URI format:  mongodb://[dbuser:dbpassword@]host:port/dbname
 // GO TO mLab.com account to see what YOUR database URL is
 //CHANGE the url so it is correct for your account
-    var uri = 'mongodb://steven:steven@ds259175.mlab.com:59175/songscs3520';
+        var uri = 'mongodb://steven:steven@ds259175.mlab.com:59175/songscs3520';
 
 //using mongodb module
-    mongodb.MongoClient.connect(uri, function (err, db) {
+        mongodb.MongoClient.connect(uri, function (err, db) {
 
-        if (err) throw err;
-
-        /*
-         * First we'll add a  few songs. Nothing is required to create the
-         * songs collection;  it is created automatically when we insert.
-         */
-        var custInfo = db.collection('CUSTOMER');
-        var shipping = db.collection('SHIPPING');
-        var billing = db.collection('BILLING');
-        var order = db.collection('ORDERS');
-
-        // Note that the  insert method can take either an array or a dict.
-        custInfo.insert(seedShip, function (err, result) {
             if (err) throw err;
+
+            /*
+             * First we'll add a  few songs. Nothing is required to create the
+             * songs collection;  it is created automatically when we insert.
+             */
+            var custInfo = db.collection('CUSTOMER');
+            var shipping = db.collection('SHIPPING');
+            var billing = db.collection('BILLING');
+            var order = db.collection('ORDERS');
+
+            // Note that the  insert method can take either an array or a dict.
+            custInfo.insert(seedShip, function (err, result) {
+                if (err) throw err;
+            });
+
+            shipping.insert(seedCust, function (err, result) {
+                if (err) throw err;
+            });
+
+            billing.insert(seedBill, function (err, result) {
+                if (err) throw err;
+            });
+            order.insert(seedOrder, function (err, result) {
+                if (err) throw err;
+            });
+
+
         });
 
-        shipping.insert(seedCust, function (err, result) {
-            if (err) throw err;
-        });
-
-        billing.insert(seedBill, function (err, result) {
-            if (err) throw err;
-        });
-        order.insert(seedOrder, function (err, result) {
-            if (err) throw err;
-        });
-
-
-    });
-
-
+    }
 
     res.render('finalOrder',{
 
@@ -290,7 +304,9 @@ router.post('/storeData', function (req, res, next) {
         quant: quantAry,
         price: priceAry,
 
-        itemNames: nameAry
+        itemNames: nameAry,
+
+        status:status
 
     });
 
