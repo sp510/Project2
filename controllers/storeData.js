@@ -310,7 +310,7 @@ router.post('/storeData', function (req, res, next) {
 
         itemNames: nameAry,
 
-        //status:status
+        status:status
 
     });
 
