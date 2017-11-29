@@ -7,7 +7,7 @@ module.exports = router;
 
 
 
-/* GET home page. */
+/* GET home page. *///
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Hello World!' });
