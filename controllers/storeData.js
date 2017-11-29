@@ -98,74 +98,86 @@ router.post('/storeData', function (req, res, next) {
 
 
     /********************************************************************************************************
-    //This Code is used to extract the incoming values of 'Product_Vector'
+    //Extracting Algorithm STARTS
+     //
+     //This Code is used to extract the incoming values of 'Product_Vector'
     // and conveniently storing them into 3 separate arrays that could later be iterated over to get the values.
     ////Related data are tied to same indices
     //*******************************************************************************************************/
 
+        //3 parallel arrays, same data is related by the same array indices
     var prodIDAry = [];
     var quantAry = [];
     var priceAry = [];
+
+
     var start_pos; //Starting Position
     var end_pos = 0; //Ending Position the substring in between will be extracted
     var cur_pos = 0; //cur_pos, used to make sure starting position does not reset
 
+    //If cart is empty nothing is stored into the mlab database
+    //and an error message will be relayed to the user if they try to submit the order,
     if (emptyCart === 'false')
     {
 
-    while ( true )
-    {
-        //finds and sets the initial index to extract substring of "products"
-        start_pos = products.indexOf('ProductID_', end_pos) + 10;
-
-        //checker to break, because indexof will loop infinitely looking for substring occurrences
-        if(cur_pos > start_pos)
+        while ( true )
         {
-            break;
-        }
-        cur_pos = start_pos;
-        end_pos = products.indexOf(',', start_pos);
+            //finds and sets the initial index to extract substring of "products"
+            start_pos = products.indexOf('ProductID_', end_pos) + 10;
 
-        //All products IDs are extracted to be used in the output
-        prodIDAry.push(products.substring(start_pos, end_pos));
+            //checker to break, because indexof will loop infinitely looking for substring occurrences
+            if(cur_pos > start_pos)
+            {
+                break;
+            }
+            cur_pos = start_pos;
+            end_pos = products.indexOf(',', start_pos);
+
+            //All products IDs are extracted to be used in the output
+            prodIDAry.push(products.substring(start_pos, end_pos));
+
+        }
+
+        //RESETS substring substring positioning for next iteration
+        end_pos = 0;
+        cur_pos = 0;
+
+        while ( true )
+        {
+
+            start_pos = products.indexOf('Quantity', end_pos) + 8;
+
+            if(cur_pos > start_pos)
+            {
+                break;
+            }
+
+            cur_pos = start_pos;
+            end_pos = products.indexOf(',', start_pos);
+
+            //Quantity data
+            quantAry.push(products.substring(start_pos, end_pos));
+
 
     }
 
-    end_pos = 0;
-    cur_pos = 0;
+        end_pos = 0;
+        cur_pos = 0;
 
-    while ( true )
-    {
-
-        start_pos = products.indexOf('Quantity', end_pos) + 8;
-
-        if(cur_pos > start_pos)
+        while ( true )
         {
-            break;
-        }
-        cur_pos = start_pos;
+            start_pos = products.indexOf('Price', end_pos) + 5;
 
-        end_pos = products.indexOf(',', start_pos);
-        quantAry.push(products.substring(start_pos, end_pos));
+            if(cur_pos > start_pos)
+            {
+                break;
+            }
 
+            cur_pos = start_pos;
+            end_pos = products.indexOf('}', start_pos);
 
-    }
-
-    end_pos = 0;
-    cur_pos = 0;
-
-    while ( true )
-    {
-        start_pos = products.indexOf('Price', end_pos) + 5;
-
-        if(cur_pos > start_pos)
-        {
-            break;
-        }
-        cur_pos = start_pos;
-
-        end_pos = products.indexOf('}', start_pos);
-        priceAry.push(products.substring(start_pos, end_pos));
+            //Price data is stored into its own array.
+            priceAry.push(products.substring(start_pos, end_pos));
     }
     /******************************************************************************************************
     //*** Extracting Algorithm Ends
@@ -246,16 +258,13 @@ router.post('/storeData', function (req, res, next) {
 
             if (err) throw err;
 
-            /*
-             * First we'll add a  few songs. Nothing is required to create the
-             * songs collection;  it is created automatically when we insert.
-             */
+            //Creating 3 separate collections to store data
             var custInfo = db.collection('CUSTOMER');
             var shipping = db.collection('SHIPPING');
             var billing = db.collection('BILLING');
             var order = db.collection('ORDERS');
 
-            // Note that the  insert method can take either an array or a dict.
+            //inserting info into the database
             custInfo.insert(seedShip, function (err, result) {
                 if (err) throw err;
             });
@@ -280,6 +289,7 @@ router.post('/storeData', function (req, res, next) {
 
     }
 
+    //sends all output variales to storeData.ejs to be outputted
     res.render('storeData',{
 
         fName: fName,

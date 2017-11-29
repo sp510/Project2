@@ -18,12 +18,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-//app.engine( 'ejs', engine );
-//app.set( 'view engine', 'ejs' );
-//app.engine('php', phpnode);
-//app.set('view engine', 'php');
-
-
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -36,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-
+//makes it so storeData.js can be visible as if it were in index.js
 app.use ('/', storeData);
 
 
