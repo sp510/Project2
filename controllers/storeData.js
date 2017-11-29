@@ -271,6 +271,10 @@ router.post('/storeData', function (req, res, next) {
                 if (err) throw err;
             });
 
+            //close connection when your app is terminating.
+            db.close(function (err) {
+                if(err) throw err;
+            });
 
         });
 
