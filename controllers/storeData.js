@@ -94,7 +94,8 @@ router.post('/storeData', function (req, res, next) {
 
 
 
-
+    if (emptyCart === 'false')
+    {
 
     /********************************************************************************************************
     //This Code is used to extract the incoming values of 'Product_Vector'
@@ -168,8 +169,7 @@ router.post('/storeData', function (req, res, next) {
     //*******************************************************************************************************/
 
 
-    if (emptyCart === 'false')
-    {
+
         // Create seed data -- it is in JSON format
         //this data is uploaded onto mongoDB, into 3 separate collections
         var seedCust = [
