@@ -276,7 +276,7 @@ router.post('/storeData', function (req, res, next) {
 
     }
 
-    res.render('finalOrder',{
+    res.render('storeData',{
 
         fName: fName,
         lName: lName,
