@@ -289,7 +289,7 @@ router.post('/storeData', function (req, res, next) {
 
     }
 
-    //sends all output variales to storeData.ejs to be outputted
+    //sends all output variables to storeData.ejs to be outputted
     res.render('storeData',{
 
         fName: fName,
